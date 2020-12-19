@@ -10,7 +10,7 @@ async function drawLineChart() {
   const xAccessor = (d) => parseDate(d["date"])
 
   let dimensions = {
-      width: window.innerWidth * 0.9,
+    width: window.innerWidth * 0.9,
     height: 400,
     margin: {
       top: 15,
@@ -48,11 +48,11 @@ async function drawLineChart() {
   const freezingTemperaturePlacement = yScale(32)
   const freezingTemperatures = bounds
     .append("rect")
-    .attr("x", 0)
-    .attr("width", dimensions.boundedWidth)
-    .attr("y", freezingTemperaturePlacement)
-    .attr("height", dimensions.boundedWidth - freezingTemperaturePlacement)
-    .attr("fill", "#e0f3f3")
+      .attr("x", 0)
+      .attr("width", dimensions.boundedWidth)
+      .attr("y", freezingTemperaturePlacement)
+      .attr("height", dimensions.boundedHeight - freezingTemperaturePlacement)
+      .attr("fill", "#e0f3f3")
 
   const xScale = d3
     .scaleTime()
@@ -73,6 +73,23 @@ async function drawLineChart() {
     .attr("fill", "none")
     .attr("stroke", "gray")
     .attr("stroke-width", 2)
+
+  // Draw periperals
+
+  const yAxisGenerator = d3.axisLeft()
+      .scale(yScale)
+
+  const yAxis = bounds.append("g")
+      .call(yAxisGenerator)
+
+  const xAxisGenerator = d3.axisBottom()
+      .scale(xScale)
+
+  const xAxis = bounds.append("g")
+      .call(xAxisGenerator)
+      .style("transform", `translateY(${
+        dimensions.boundedHeight
+      }px)`)
 }
 
 drawLineChart()
