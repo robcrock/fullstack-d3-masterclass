@@ -75,7 +75,7 @@ async function drawLineChart() {
     .attr("stroke-width", 2)
 
   // Draw periperals
-
+œ
   const yAxisGenerator = d3.axisLeft()
       .scale(yScale)
 
