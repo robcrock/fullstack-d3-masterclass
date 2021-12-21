@@ -1,20 +1,27 @@
-import React from "react"
+import React, { useContext } from "react"
 import PropTypes from "prop-types"
-import { accessorPropsType } from "./utils";
+import { accessorPropsType } from "./utils"
+import { tooltipContext } from "../../hooks/useTooltip"
 
-const Circles = ({ data, keyAccessor, xAccessor, yAccessor, radius }) => (
-  <React.Fragment>
-    {data.map((d, i) => (
-      <circle
-        className="Circles__circle"
-        key={keyAccessor(d, i)}
-        cx={xAccessor(d, i)}
-        cy={yAccessor(d, i)}
-        r={typeof radius == "function" ? radius(d) : radius}
-      />
-    ))}
-  </React.Fragment>
-)
+const Circles = ({ data, keyAccessor, xAccessor, yAccessor, radius }) => {
+  const { setTooltip } = useContext(tooltipContext)
+
+  return (
+    <React.Fragment>
+      {data.map((d, i) => (
+        <circle
+          className="Circles__circle"
+          key={keyAccessor(d, i)}
+          cx={xAccessor(d, i)}
+          cy={yAccessor(d, i)}
+          r={typeof radius == "function" ? radius(d) : radius}
+          onMouseOver={() => setTooltip(d)}
+          onMouseOut={() => setTooltip(false)}
+        />
+      ))}
+    </React.Fragment>
+  )
+}
 
 Circles.propTypes = {
   data: PropTypes.array,
