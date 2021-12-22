@@ -1,11 +1,15 @@
-import React, { useContext } from "react"
+import React from "react"
 import PropTypes from "prop-types"
 import { accessorPropsType } from "./utils"
-import { tooltipContext } from "../../hooks/useTooltip"
 
-const Circles = ({ data, keyAccessor, xAccessor, yAccessor, radius }) => {
-  const { setTooltip } = useContext(tooltipContext)
-
+const Circles = ({
+  data,
+  keyAccessor,
+  xAccessor,
+  yAccessor,
+  radius,
+  setTooltip,
+}) => {
   return (
     <React.Fragment>
       {data.map((d, i) => (

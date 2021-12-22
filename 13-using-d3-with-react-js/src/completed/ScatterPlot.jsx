@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import * as d3 from "d3"
 
@@ -7,13 +7,12 @@ import Circles from "./Chart/Circles"
 import Axis from "./Chart/Axis"
 import Tooltip from "./Chart/Tooltip"
 import { useChartDimensions, accessorPropsType } from "./Chart/utils"
-import { tooltipContext } from "../hooks/useTooltip"
 
 const ScatterPlot = ({ data, xAccessor, yAccessor, xLabel, yLabel }) => {
   const [ref, dimensions] = useChartDimensions({
     marginBottom: 77,
   })
-  const { tooltip, setTooltip } = useContext(tooltipContext)
+  const [tooltip, setTooltip] = useState(false)
 
   const xScale = d3
     .scaleLinear()
@@ -51,6 +50,7 @@ const ScatterPlot = ({ data, xAccessor, yAccessor, xLabel, yLabel }) => {
           keyAccessor={keyAccessor}
           xAccessor={xAccessorScaled}
           yAccessor={yAccessorScaled}
+          setTooltip={setTooltip}
         />
         {tooltip && (
           <Tooltip x={xAccessorScaled(tooltip)} y={yAccessorScaled(tooltip)} />

@@ -9,8 +9,6 @@ import Timeline from "./completed/Timeline"
 import ScatterPlot from "./completed/ScatterPlot"
 import Histogram from "./completed/Histogram"
 
-import { useTooltip, tooltipContext } from "./hooks/useTooltip"
-
 import "./styles.css"
 
 const parseDate = d3.timeParse("%m/%d/%Y")
@@ -29,33 +27,29 @@ const App = () => {
   //   setData(getData())
   // }, 4000)
 
-  const state = useTooltip()
-
   return (
     <div className="App">
-      <tooltipContext.Provider value={state}>
-        <h1>Weather Data</h1>
-        <div className="App__charts">
-          {/* <Timeline
-            data={data.timeline}
-            xAccessor={dateAccessor}
-            yAccessor={temperatureAccessor}
-            label="Temperature"`
-          /> */}
-          <ScatterPlot
-            data={data.scatter}
-            xAccessor={humidityAccessor}
-            yAccessor={temperatureAccessor}
-            xLabel="Humidity"
-            yLabel="Temperature"
-          />
-          {/* <Histogram
-            data={data.scatter}
-            xAccessor={humidityAccessor}
-            label="Humidity"
-          /> */}
-        </div>
-      </tooltipContext.Provider>
+      <h1>Weather Data</h1>
+      <div className="App__charts">
+        <Timeline
+          data={data.timeline}
+          xAccessor={dateAccessor}
+          yAccessor={temperatureAccessor}
+          label="Temperature"
+        />
+        <ScatterPlot
+          data={data.scatter}
+          xAccessor={humidityAccessor}
+          yAccessor={temperatureAccessor}
+          xLabel="Humidity"
+          yLabel="Temperature"
+        />
+        <Histogram
+          data={data.scatter}
+          xAccessor={humidityAccessor}
+          label="Humidity"
+        />
+      </div>
     </div>
   )
 }
